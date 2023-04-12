@@ -9,30 +9,6 @@ void handler1(void);     // 中断函数1，引脚高
 void handler2(void);     // 中断函数2，引脚低
 void handler3(void);
 void handler4(void);
-class MG995              // 顺序控制电机
-{
-private:
-    /* data */
-public:
-    uint8_t pin = 0;
-    MG995(){};
-    ~MG995(){};
-    void init(uint8_t pin)
-    {
-        this->pin = pin;
-        pinMode(pin, OUTPUT);
-    }
-    /// @brief 发送PWM以改变角度
-    /// @param PWM up time(ms),500-2500->0-180 digree
-    void sendPWM(unsigned long PWM)
-    {
-        PWM = (PWM - 500) % 2000 + 500;
-        digitalWrite(this->pin, HIGH);
-        delayMicroseconds(PWM);
-        digitalWrite(this->pin, LOW);
-        delay(20);
-    }
-};
 
 class MG995_hdTimer // 中断控制电机
 {

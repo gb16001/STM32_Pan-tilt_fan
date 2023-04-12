@@ -1,12 +1,13 @@
 #ifndef _the_shell_
 #define _the_shell_
 #include <Arduino.h>
-#include "my_18b20.hpp"
-#include "mg995.hpp"
-#include "mySerial.hpp"
-#include "oledDisplay.h"
-#include "HardwareSerial.h"
-#include "myFan.hpp"
+#include "my_18b20.hpp" //温度传感器
+// #include "mg995.hpp"//定时中断控制舵机
+#include "mySerial.hpp"     //串口初始化
+#include "oledDisplay.h"    //显示屏驱动
+#include "HardwareSerial.h" //硬件串口
+#include "myFan.hpp"        //风扇控制
+#include "mg_delay.hpp"     //延时函数控制舵机
 /*硬件资源类抽象*/
 
 oledDisplay myOled(-1, -1, false, false, 700000);
@@ -26,6 +27,7 @@ void commandUnderstand(String command)
         Serial.print("get a num:");
         Serial.println(command.toInt());
         break;
+#ifdef MG995_H
     case 'm': // 舵机命令
         command.remove(0, 2);
         this_mg.digChange(command.toInt());
@@ -34,9 +36,11 @@ void commandUnderstand(String command)
         command.remove(0, 2);
         // 保留用作电机2的命令
         break;
+#endif
+
     case 'o': // OLED显示屏命令
         command.remove(0, 2);
-        if (command=="clear\n")
+        if (command == "clear\n")
         {
             myOled.clear();
         }
@@ -44,8 +48,7 @@ void commandUnderstand(String command)
         {
             myOled < command;
         }
-        
-        
+
         break;
     case 'f': // 风扇命令
         command.remove(0, 2);
