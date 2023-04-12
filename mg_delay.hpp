@@ -27,7 +27,7 @@ public:
     }
     /// @brief 改变角度
     /// @param digree 0-180 digree
-    void digChange(uint16 digree)
+    void digChange(int digree)
     {
         unsigned long up_time_us = (digree * 200 / 18.0) + 500;
         digitalWrite(this->pin, HIGH);

@@ -37,7 +37,26 @@ void commandUnderstand(String command)
         // 保留用作电机2的命令
         break;
 #endif
-
+#ifndef MG995_H
+#ifdef MG_delay_H
+    case 'm': // 舵机命令
+        command.remove(0, 2);
+        mg_01.digChange(command.toInt());
+#ifdef DEBUG_PRINT
+        Serial.print("mg1 dig=");
+        Serial.println(command.toInt());
+#endif
+        break;
+    case 'n': // 舵机2命令
+        command.remove(0, 2);
+        mg_02.digChange(command.toInt());
+#ifdef DEBUG_PRINT
+        Serial.print("mg2 dig=");
+        Serial.println(command.toInt());
+#endif
+        break;
+#endif
+#endif
     case 'o': // OLED显示屏命令
         command.remove(0, 2);
         if (command == "clear\n")

@@ -24,7 +24,7 @@ void loop()
   command_demo();
   delay(100);
   // this_mg.digChange(0);
-  mg_01_02_demo();
+
 }
 
 void command_demo()
