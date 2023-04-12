@@ -1,18 +1,37 @@
 
 #include "shell.hpp"
+//
+MG995 mg_01, mg_02;
 
 void setup()
 {
   ds.select(ds_address);
-  this_mg.init(PB5); // 两个舵机引脚分别为B5,B9
+  // this_mg.init(PB5); // 两个舵机引脚分别为B5,B9
+  // mg995_2.init(PB9,Timer2,TIMER_CH1,50,handler3);
+
   serialInit();
   myOled.init();
+
+  mg_01.init(PB5);
+  mg_02.init(PB9);
+  
 }
 
 void loop()
 {
   command_demo();
   delay(100);
+  // this_mg.digChange(0);
+  mg_01_02_demo();
+  Serial.println("init complet");
+}
+void mg_01_02_demo() // not timer interrupt
+{
+  static unsigned long pwm_value = 0;
+  pwm_value+=10;
+  pwm_value %= 2000;
+  mg_01.sendPWM(pwm_value+500);
+  mg_02.sendPWM(pwm_value+500);
 }
 void command_demo()
 {
@@ -29,7 +48,10 @@ void serial_demo()
 }
 void MG995_demo()
 {
-  this_mg.digChange(0);
+  static unsigned long pwm_value = 0;
+  pwm_value++;
+  pwm_value %= 180;
+  this_mg.digChange(pwm_value);
 }
 void ds18b20_demo()
 {

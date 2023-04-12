@@ -6,6 +6,7 @@
 #include "mySerial.hpp"
 #include "oledDisplay.h"
 #include "HardwareSerial.h"
+#include "myFan.hpp"
 /*硬件资源类抽象*/
 
 oledDisplay myOled(-1, -1, false, false, 700000);
@@ -35,7 +36,16 @@ void commandUnderstand(String command)
         break;
     case 'o': // OLED显示屏命令
         command.remove(0, 2);
-        myOled < command;
+        if (command=="clear\n")
+        {
+            myOled.clear();
+        }
+        else
+        {
+            myOled < command;
+        }
+        
+        
         break;
     case 'f': // 风扇命令
         command.remove(0, 2);
