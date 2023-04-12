@@ -1,7 +1,7 @@
 
 #include "shell.hpp"
 //
-MG995 mg_01, mg_02;
+#include "mg_demo.hpp"
 
 void setup()
 {
@@ -11,10 +11,8 @@ void setup()
 
   serialInit();
   myOled.init();
-
-  mg_01.init(PB5);
-  mg_02.init(PB9);
-  
+  mg_init();
+  Serial.println("init complet");
 }
 
 void loop()
@@ -23,16 +21,9 @@ void loop()
   delay(100);
   // this_mg.digChange(0);
   mg_01_02_demo();
-  Serial.println("init complet");
+  
 }
-void mg_01_02_demo() // not timer interrupt
-{
-  static unsigned long pwm_value = 0;
-  pwm_value+=10;
-  pwm_value %= 2000;
-  mg_01.sendPWM(pwm_value+500);
-  mg_02.sendPWM(pwm_value+500);
-}
+
 void command_demo()
 {
   if (serial_readCommand(serial_read_box))
