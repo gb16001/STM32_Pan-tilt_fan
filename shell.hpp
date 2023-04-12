@@ -36,7 +36,7 @@ void commandUnderstand(String command)
         break;
     case 'n':
         command.remove(0, 2);
-        hd_Mg02.digChange(command.toInt());
+        hd_Mg01.digChange_2(command.toInt());
         break;
 #endif
 #ifndef MG995_H

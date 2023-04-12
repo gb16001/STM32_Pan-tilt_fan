@@ -13,7 +13,7 @@ void setup()
   // Serial.println("oled init complet");
 
   hd_Mg01.init(PB5); // 两个舵机引脚分别为B5,B9
-  hd_Mg02.init(PB9);
+  // hd_Mg02.init(PB9);
   // mg995_2.init(PB9,Timer2,TIMER_CH1,50,handler3);
 
   // mg_init();
