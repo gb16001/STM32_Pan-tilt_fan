@@ -34,7 +34,7 @@ void command_demo()
   if (serial_readCommand(serial_read_box))
   {
     
-    Serial.print(serial_read_box);
+    Serial.println(serial_read_box);
     commandUnderstand(serial_read_box);
   }
   else

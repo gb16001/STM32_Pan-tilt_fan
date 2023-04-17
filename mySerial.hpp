@@ -18,14 +18,14 @@ bool serial_readCommand(String &box)
 {
     if (Serial.available())
     {
-        Serial.println("<read string start");
+        
         // 方法一：读取string，等待setTimeout结束
         //  box = Serial.readString();
 
         // 方法二：读取until，读到\n结束
         box = Serial.readStringUntil('\n');
 
-        Serial.println("read string end>");
+        
         // serial_read_box = Serial.readString();
         return true;
     }
